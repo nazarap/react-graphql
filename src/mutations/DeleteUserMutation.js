@@ -6,11 +6,11 @@ import {ConnectionHandler} from 'relay-runtime'
 import environment from '../createRelayEnvironment'
 
 const mutation = graphql`
-    mutation DeleteUserMutation($input: DeleteUserInput!) {
-        deleteUser(input: $input) {
-            deletedId
-        }
+  mutation DeleteUserMutation($input: DeleteUserInput!) {
+    deleteUser(input: $input) {
+        deletedId
     }
+  }
 `;
 
 export default function DeleteUserMutation(userId, viewerId) {

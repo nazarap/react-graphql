@@ -7,6 +7,9 @@ export default ({ alt }) => {
   const randomImage = Math.floor(Math.random() * to) + from;
 
   return (
-    <CardImage className="img-fluid" src={require(`./../../assets/images/users${randomImage}.jpg`)} alt={alt} waves={true}/>
+    <CardImage className="img-fluid"
+               src={require(`./../../assets/images/users${randomImage}.jpg`)}
+               alt={alt}
+               waves={true}/>
   );
 };

@@ -13,11 +13,11 @@ import environment from '../createRelayEnvironment'
 import ListActions from "../components/list-actions/ListActions";
 
 const ListQuery = graphql`
-    query ListQuery {
-        viewer {
-            ...UserList_viewer
-        }
+  query ListQuery {
+    viewer {
+      ...UserList_viewer
     }
+  }
 `;
 
 export default () => {
@@ -29,13 +29,10 @@ export default () => {
           <QueryRenderer
             environment={environment}
             query={ListQuery}
-            render={({error, props}) => {
-              if (error) {
-                return null
-              } else if (props) {
-                return <UserList viewer={props.viewer}/>
-              }
-              return null
+            render={({ error, props }) => {
+              if (error) return <div>{error.message}</div>;
+              if (props) return <UserList viewer={props.viewer}/>;
+              return <div>Loading...</div>;
             }}
           />
         </Col>

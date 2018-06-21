@@ -14,14 +14,16 @@ import {
 } from "./layouts";
 
 render(
-  <Router>
-    <Switch>
-      <Route path="/edit/:id" component={Update}/>
-      <Route path="/create" component={Update} />
-      <Route exact={true} path="/list" component={List}/>
-      <Route path="*" render={() => <h1>Not found</h1>} />
-    </Switch>
-  </Router>
+  <div className="App">
+    <Router>
+      <Switch>
+        <Route path="/edit/:id" component={Update}/>
+        <Route path="/create" component={Update} />
+        <Route exact={true} path="/" component={List}/>
+        <Route path="*" render={() => <h1>Not found</h1>} />
+      </Switch>
+    </Router>
+  </div>
   , document.getElementById('root')
 );
 registerServiceWorker();

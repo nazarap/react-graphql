@@ -1,6 +1,10 @@
 import * as React from 'react';
 import UpdateUser from "../components/update-user/UpdateUser";
-import { Container, Row, Col } from 'mdbreact';
+import {
+  Container
+  , Row
+  , Col
+} from 'mdbreact';
 
 export default ({ match }) => {
   return(
