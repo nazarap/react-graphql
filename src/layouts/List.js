@@ -5,12 +5,9 @@ import {
   , Row
   , Col
 } from 'mdbreact';
-import {
-  QueryRenderer,
-  graphql
-} from 'react-relay'
-import environment from '../createRelayEnvironment'
+import { graphql } from 'react-relay'
 import ListActions from "../components/list-actions/ListActions";
+import {Query} from "../query";
 
 const ListQuery = graphql`
   query ListQuery {
@@ -26,15 +23,9 @@ export default () => {
       <ListActions/>
       <Row>
         <Col lg="12" md="12" className="mb-lg-0 mb-12">
-          <QueryRenderer
-            environment={environment}
-            query={ListQuery}
-            render={({ error, props }) => {
-              if (error) return <div>{error.message}</div>;
-              if (props) return <UserList viewer={props.viewer}/>;
-              return <div>Loading...</div>;
-            }}
-          />
+          <Query query={ListQuery} render={(viewer) => (
+            <UserList viewer={viewer}/>
+          )}/>
         </Col>
       </Row>
     </Container>

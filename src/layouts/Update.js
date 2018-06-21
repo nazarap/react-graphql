@@ -5,13 +5,25 @@ import {
   , Row
   , Col
 } from 'mdbreact';
+import { graphql } from 'react-relay'
+import { Query } from "../query";
 
-export default ({ match }) => {
-  return(
+const UpdateViewerQuery = graphql`
+  query UpdateViewerQuery {
+    viewer {
+      id
+    }
+  }
+`;
+
+export default () => {
+  return (
     <Container>
       <Row>
         <Col className="col-center" md="6">
-          <UpdateUser/>
+          <Query query={UpdateViewerQuery} render={(viewer) => (
+            <UpdateUser viewer={viewer}/>
+          )}/>
         </Col>
       </Row>
     </Container>

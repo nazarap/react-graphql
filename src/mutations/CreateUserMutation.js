@@ -6,9 +6,9 @@ import environment from '../createRelayEnvironment'
 import {ConnectionHandler} from 'relay-runtime'
 
 const mutation = graphql`
-  mutation CreateUserMutation($input: CreateUserInput!) {
+  mutation CreateUserMutation($input: SignupUserInput!) {
     createUser(input: $input) {
-      post {
+      user {
         id
         name
         email

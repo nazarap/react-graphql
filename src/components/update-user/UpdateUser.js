@@ -8,6 +8,7 @@ import {
   , Col
 } from 'mdbreact';
 import { Link } from 'react-router-dom';
+import { CreateUserMutation } from "../../mutations";
 
 export default class UpdateUser extends React.Component {
   constructor(props) {
@@ -15,6 +16,12 @@ export default class UpdateUser extends React.Component {
     const user = props.user;
 
     this.title = user ? `Edit ${user.name} user` : 'Create new user';
+    this._createUser = this._createUser.bind(this);
+
+  }
+
+  _createUser() {
+    CreateUserMutation('test user', 'test@gmail.com', true, this.props.viewer.id, () => this.props.history.replace('/'))
   }
 
   render() {
@@ -53,8 +60,9 @@ export default class UpdateUser extends React.Component {
 
               <Link to="/">
                   <Button color="cyan"
-                          type="submit">
-                    Cancel</Button>
+                          type="submit"
+                          onClick={this._createUser}>
+                  Cancel</Button>
               </Link>
             </div>
           </form>

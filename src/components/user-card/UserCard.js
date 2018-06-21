@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import Active from "../active/Active";
 import RandomImage from "../random-image/RandomImage";
-import DeleteUserMutation from '../../mutations/DeleteUserMutation';
+import { DeleteUserMutation } from '../../mutations';
 import { withRouter } from 'react-router-dom';
 import {
   createFragmentContainer
