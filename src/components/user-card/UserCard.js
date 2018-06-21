@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 import Active from "../active/Active";
 import RandomImage from "../random-image/RandomImage";
 import { DeleteUserMutation } from '../../mutations';
-import { withRouter } from 'react-router-dom';
 import {
   createFragmentContainer
   , graphql
@@ -55,7 +54,7 @@ class UserCard extends React.Component {
     );
   };
 }
-const FragmentContainer = createFragmentContainer(UserCard, graphql`
+export default createFragmentContainer(UserCard, graphql`
   fragment UserCard_viewer on Viewer {
     id
   }
@@ -66,5 +65,3 @@ const FragmentContainer = createFragmentContainer(UserCard, graphql`
     active
   }
 `);
-
-export default withRouter(FragmentContainer);
