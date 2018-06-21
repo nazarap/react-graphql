@@ -1,0 +1,18 @@
+
+.update-user .update-user__checkbox {
+    text-align: left;
+    cursor: pointer;
+    padding-left: 2px;
+}
+
+.update-user .update-user__checkbox input {
+    border-color: inherit;
+    outline: 0;
+    -webkit-box-shadow: none;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.update-user .update-user__checkbox label {
+    color: #757275;
+}

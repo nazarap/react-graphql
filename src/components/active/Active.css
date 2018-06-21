@@ -1,0 +1,7 @@
+span.badge {
+    font-size: 10px;
+}
+
+span.badge.badge-danger {
+    background-color: #ff3547 !important;
+}
