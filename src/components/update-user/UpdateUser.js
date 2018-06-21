@@ -8,28 +8,35 @@ import {
   , Col
 } from 'mdbreact';
 import { Link } from 'react-router-dom';
-import { CreateUserMutation } from "../../mutations";
+import {
+  CreateUserMutation
+  , UpdateUserMutation
+} from "../../mutations";
 import User from "../../domains/User";
 import { withRouter } from 'react-router-dom';
+import {
+  createFragmentContainer,
+  graphql
+} from 'react-relay';
 
 class UpdateUser extends React.Component {
   constructor(props) {
     super(props);
+    const user = props.viewer.User;
 
     this.state = {
-      user: new User()
+      user: user ? user : new User()
     };
-    this.title = "Create new user!";
+    this.title = user ? `Update '${user.name}' user` : "Create new user!";
+    this.updateButton = user ? `Update` : "Create";
     this._updateUser = this._updateUser.bind(this);
     this._fieldChange = this._fieldChange.bind(this);
   }
 
-  componentDidMount(){}
-
   _updateUser() {
-    const { user: { name, email, active }} = this.state;
+    const { user: { id, name, email, active }} = this.state;
     if(!name || !email) return;
-    CreateUserMutation(name, email, active, this.props.viewer.id, () => this.props.history.replace('/'))
+    (id ? UpdateUserMutation : CreateUserMutation)(id, name, email, active, this.props.viewer.id, () => this.props.history.replace('/'));
   }
 
   _fieldChange(event) {
@@ -58,16 +65,16 @@ class UpdateUser extends React.Component {
                 <Input label="Your name"
                        type="text"
                        name="name"
-                       value={user.name}
-                       onChange={this._fieldChange}
+                       value={ user.name }
+                       onChange={ this._fieldChange }
                        validate={true}
                        success="right"/>
 
                 <Input label="Your email"
                        type="email"
                        name="email"
-                       value={user.email}
-                       onChange={this._fieldChange}
+                       value={ user.email }
+                       onChange={ this._fieldChange }
                        validate={true}
                        error="wrong"
                        success="right"/>
@@ -76,8 +83,8 @@ class UpdateUser extends React.Component {
                   <input type="checkbox"
                          name="active"
                          className="form-control form-check-input text-left"
-                         onChange={this._fieldChange}
-                         value={user.active}/>
+                         onChange={ this._fieldChange }
+                         value={ user.active }/>
 
                   <label className="form-check-label mr-5">
                     User is active</label>
@@ -86,8 +93,8 @@ class UpdateUser extends React.Component {
             </div>
             <div className="text-right py-4 mt-3">
               <Button color="cyan"
-                      onClick={this._updateUser}>
-                Create</Button>
+                      onClick={ this._updateUser }>
+                { this.updateButton }</Button>
 
               <Link to="/">
                   <Button color="cyan"
@@ -100,6 +107,17 @@ class UpdateUser extends React.Component {
       </Card>
     );
   }
-};
+}
 
-export default withRouter(UpdateUser);
+const FragmentContainer = createFragmentContainer(UpdateUser, graphql`
+  fragment UpdateUser_viewer on Viewer {
+    User (id: "cjiopyfnyqqkl0183wh80xt0t") {
+        id
+        name,
+        email,
+        active
+    }
+  }
+`);
+
+export default withRouter(FragmentContainer);

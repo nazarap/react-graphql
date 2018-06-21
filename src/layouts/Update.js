@@ -11,7 +11,7 @@ import { Query } from "../query";
 const UpdateViewerQuery = graphql`
   query UpdateViewerQuery {
     viewer {
-      id
+      ...UpdateUser_viewer
     }
   }
 `;
